@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.upload.mapper.WeatherMapper">
+    <insert id="insertweather" parameterType="com.example.upload.entity.Weather" useGeneratedKeys="true">
+        INSERT INTO excel.weather(
+                        windSpeed,
+                        rainfall,
+                        atmosphericTemperature,
+                        accumulation,
+                        pressure,
+                        windDirection,
+                        airHumidity,
+                        noise,
+                        illumination,
+                        pm10,
+                        pm25,
+                        createTime)
+                        VALUES
+                        (#{windSpeed},
+                        #{rainfall},
+                        #{atmosphericTemperature},
+                        #{accumulation},
+                        #{pressure},
+                        #{windDirection},
+                        #{airHumidity},
+                        #{noise},
+                        #{illumination},
+                        #{pm10},
+                        #{pm25},
+                        #{createTime});
+
+    </insert>
+
+    <insert id="insertbatch" parameterType="java.util.List">
+        INSERT INTO excel.weather (
+                        windSpeed,
+                        rainfall,
+                        atmosphericTemperature,
+                        accumulation,
+                        pressure,
+                        windDirection,
+                        airHumidity,
+                        noise,
+                        illumination,
+                        pm10,
+                        pm25,
+                        createTime)
+        VALUES
+        <foreach collection ="list" item="list" index= "index" separator =",">
+            (#{list.windSpeed},
+             #{list.rainfall},
+             #{list.atmosphericTemperature},
+             #{list.accumulation},
+             #{list.pressure},
+             #{list.windDirection},
+             #{list.airHumidity},
+             #{list.noise},
+             #{list.illumination},
+             #{list.pm10},
+             #{list.pm25},
+             #{list.createTime})
+
+        </foreach >
+    </insert>
+</mapper>
